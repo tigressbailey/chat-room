@@ -1,0 +1,28 @@
+.app {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.app-header,
+.app-content {
+  flex: 1;
+}
+
+.app-content {
+  margin-top: 20px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
