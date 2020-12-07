@@ -1,12 +1,9 @@
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { Text, Switch, Box } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { publishStream, setMuted, setPublished } from '../actions/agoraStatesActions'
 import { RootState } from '../reducers/rootReducer'
 import toast from '../utils/statusToast'
-
-type InputEvent = ChangeEvent<HTMLInputElement>
-type ChangeHandler = (e: InputEvent) => void
 
 const SwitchGroup: React.FC = () => {
   const dispatch = useDispatch()
@@ -41,7 +38,7 @@ const SwitchGroup: React.FC = () => {
     })
   }
 
-  const onMutedChanged: ChangeHandler = (e) => {
+  const onMutedChanged = (e: any) => {
     if (!e.target.checked) {
       unmuteAudio()
     } else {
@@ -49,7 +46,7 @@ const SwitchGroup: React.FC = () => {
     }
   }
 
-  const onPublishedChanged: ChangeHandler = (e) => {
+  const onPublishedChanged = (localStream: any, client: any) => (e: any) => {
     if (!e.target.checked) {
       unpublishStream(localStream, client)
     } else {
@@ -65,7 +62,7 @@ const SwitchGroup: React.FC = () => {
       </Box>
       <Box marginBottom={'15px'}>
         <Text mb="8px">Published:</Text>
-        <Switch isChecked={published} onChange={onPublishedChanged} />
+        <Switch isChecked={published} onChange={onPublishedChanged(localStream, client)} />
       </Box>
     </>
   )

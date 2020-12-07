@@ -9,22 +9,22 @@ const ButtonGroup: React.FC = () => {
   const agoraStates = useSelector((state: RootState) => state.agoraStates)
   const { localStream, client, isLoading, isJoined } = agoraStates
 
-  const onJoinClicked = () => {
+  const onJoinClicked = (agoraStates: any) => () => {
     dispatch(joinChatRoom(agoraStates))
   }
 
-  const onLeaveClicked = () => {
+  const onLeaveClicked = (localStream: any, client: any) => () => {
     dispatch(leaveChatRoom(localStream, client))
   }
 
   return (
     <>
       {isJoined ? (
-        <Button colorScheme="blue" isLoading={isLoading} onClick={onLeaveClicked}>
+        <Button colorScheme="blue" isLoading={isLoading} onClick={onLeaveClicked(localStream, client)}>
           Leave
         </Button>
       ) : (
-        <Button colorScheme="blue" isLoading={isLoading} onClick={onJoinClicked}>
+        <Button colorScheme="blue" isLoading={isLoading} onClick={onJoinClicked(agoraStates)}>
           Join
         </Button>
       )}
